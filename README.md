@@ -1,10 +1,9 @@
-# metamask-login
+# Projecto BlockChain
 
-MetaMask Login
-
+BlockChain login wallets - Conection smart contract ABI
 ## Instruções
 
-- Crie um arquivo .env com qualquer variável apenas para detalhar que a variável existe para rodar o projeto!
+- Solicitar o ABI .json para os 2 Synval
 
 1. npm install
 2. npm start
