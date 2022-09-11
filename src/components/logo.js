@@ -5,7 +5,7 @@ import logoImg from '../assets/logo.svg';
 export function Logo({ size = 32, fontColor = 'white' }) {
   return (
     <Flex align='center' justify='center'>
-      <img src={logoImg} style={{ height: size }} />
+      <img src={logoImg} style={{ height: size }} alt='PoolsMine' />
       <Text
         fontSize='20px'
         display={['none', 'none', 'inline-block']}

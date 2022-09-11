@@ -5,11 +5,18 @@ export const messages = {
         contractBalance: 'Contract Balance',
         investors: 'Investors',
         bnbPrice: 'BNB Price',
+        connectWallet: 'Connect Wallet',
+      },
+      modal: {
+        termsOfService: 'Terms of Service',
+        privacyOne: 'By connecting a wallet, you agree to PoolsMine ',
+        privacyTwo:
+          ' and acknowledge that you have read and understand the PoolsMine Disclaimer.',
       },
       title: {
         description: 'AUDITED STAKE MINING SMART CONTRACT',
         main: 'Stake Mining',
-        rest: 'of +15 cryptos in a single click',
+        rest: ' of +15 cryptos in a single click',
         sub: 'Return of 4.44% per day in BNB',
         roi: 'ROI in 22 days',
       },
@@ -22,9 +29,10 @@ export const messages = {
         depositAmount: 'Deposit Amount',
         balance: 'Balance',
         totalReturn: 'Total Return',
-        whitedrawTime: 'Whitedraw Time',
+        withdrawTime: 'Withdraw Time',
         totalProfit: 'Total Profit',
         warning: 'By using Dapp you agree to the ',
+        stakingBnb: 'Staking BNB',
       },
       cards: {
         title: 'Where to start?',

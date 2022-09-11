@@ -1,19 +1,39 @@
 import React from 'react';
-import { Box, Flex, Text } from '@chakra-ui/react';
+import {
+  Box,
+  Button,
+  Flex,
+  Menu,
+  MenuButton,
+  MenuItem,
+  MenuList,
+  Text,
+} from '@chakra-ui/react';
 import { formatCurrency } from '../utils/formatCurrency';
 import { Logo } from './logo';
 import { i18n } from '../translate/i18n';
 import { Link, useLocation } from 'react-router-dom';
 import { LanguageSelector } from './languageSelector';
+import { MiddleEllipsis } from '../utils/text';
+import { FaChevronDown } from 'react-icons/fa';
+import { ConnectButton } from './connectButton';
 
-export function Header({ bnbPrice, contractBalance, investors, total, id }) {
+export function Header({
+  bnbPrice,
+  contractBalance,
+  investors,
+  total,
+  id,
+  onConnectWallet,
+  onDisconnect,
+}) {
   const { pathname } = useLocation();
 
   return (
     <Flex flexDir='column'>
       <Flex
         bgColor='#141518'
-        p={['0', '0.5rem 2rem', '0.5rem 2rem']}
+        p={['0.25rem', '0.5rem 2rem', '0.5rem 2rem']}
         justify={['flex-start', 'center', 'space-between']}
       >
         <Flex
@@ -44,13 +64,19 @@ export function Header({ bnbPrice, contractBalance, investors, total, id }) {
       </Flex>
 
       <Flex
-        p={['0', '0.5rem 3rem', '0.5rem 3rem']}
+        p={['0.5rem', '0.5rem 3rem', '0.5rem 3rem']}
         align='center'
         justify='space-between'
       >
         <Logo />
 
-        <Flex fontWeight='500' fontSize='14px' lineHeight='20px' align='center'>
+        <Flex
+          fontWeight='500'
+          fontSize='14px'
+          lineHeight='20px'
+          align='center'
+          display={['none', 'none', 'flex']}
+        >
           <Link to='/'>
             <Text
               p='1rem'
@@ -74,8 +100,15 @@ export function Header({ bnbPrice, contractBalance, investors, total, id }) {
           </Flex>
         </Flex>
 
-        <Flex>
+        <Flex style={{ gap: '0.5rem' }}>
           <LanguageSelector />
+
+          <ConnectButton
+            id={id}
+            total={total}
+            onConnectWallet={onConnectWallet}
+            onDisconnect={onDisconnect}
+          />
         </Flex>
       </Flex>
     </Flex>

@@ -1,14 +1,17 @@
 import { Flex } from '@chakra-ui/react';
 import { ethers } from 'ethers';
 import React, { useEffect, useState } from 'react';
+import { Balance } from './components/balance';
+import { Description } from './components/description';
 import { Header } from './components/header';
+import { Liquidity } from './components/liquidity';
+import { VideoList } from './components/videoList';
 import erc20abi from './ERC20abi.json';
-import { i18n } from './translate/i18n';
-import TxList from './TxList';
 
 export default function App() {
   const [txs, setTxs] = useState([]);
   const [contractListened, setContractListened] = useState();
+  const [token, setToken] = useState(null);
   const [contractInfo, setContractInfo] = useState({
     address: '-',
     tokenName: '-',
@@ -30,8 +33,6 @@ export default function App() {
       );
 
       erc20.on('Transfer', (from, to, amount, event) => {
-        console.log({ from, to, amount, event });
-
         setTxs((currentTxs) => [
           ...currentTxs,
           {
@@ -93,9 +94,23 @@ export default function App() {
     await erc20.transfer(data.get('recipient'), data.get('amount'));
   };
 
-  useEffect(() => {
-    i18n.changeLanguage('en');
-  }, []);
+  function handleConnectWallet(type) {
+    // type: 'metamask' | 'walletconnect'
+
+    // connect wallet
+
+    setToken('0x2c818u65y8d91ye252');
+  }
+
+  function handleDisconnect() {
+    // disconnect wallet
+
+    setToken(null);
+  }
+
+  function handleWithdraw() {
+    // withdraw
+  }
 
   return (
     <Flex flexDir='column'>
@@ -104,10 +119,41 @@ export default function App() {
         contractBalance={204.6}
         investors={1618}
         total={0.42}
-        id='0x2c818u65y8d91ye252'
+        id={token}
+        onConnectWallet={handleConnectWallet}
+        onDisconnect={handleDisconnect}
       />
 
-      <button onClick={getMyBalance}>Balança</button>
+      <Flex w={['95vw', '80vw', '65vw']} m='0 auto' flexDir='column'>
+        <Description />
+
+        <Liquidity total={0.42} />
+
+        <VideoList
+          videos={[
+            'KKYGRI0qwXE',
+            'nooUwtdfaqQ',
+            'Ss3PhdfPySY',
+            'xVnELRoT--U',
+            'wHGvvFYbstQ',
+            'nnF_UqomQjE',
+          ]}
+        />
+
+        <Balance
+          availableForWithdraw={0.01}
+          directReferredMembers={2}
+          referringLink={
+            'https://poolsmine.com?0x2c814A9112c82C9Cb14372459E2CA3b5BEfae252'
+          }
+          totalReferralEarned={0.002}
+          totalReferralWithDraw={0}
+          totalStaked={1.02}
+          totalStakedTooltip="Lorem Ipsum"
+          availableForWithdrawTooltip="Lorem Ipsum"
+          onWithdraw={handleWithdraw}
+        />
+      </Flex>
     </Flex>
   );
 }

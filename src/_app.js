@@ -27,8 +27,6 @@ export default function App() {
       );
 
       erc20.on('Transfer', (from, to, amount, event) => {
-        console.log({ from, to, amount, event });
-
         setTxs((currentTxs) => [
           ...currentTxs,
           {
