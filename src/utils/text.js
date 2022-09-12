@@ -10,3 +10,11 @@ export function MiddleEllipsis(text = '', maxWidth = 30) {
 
   return `${left}${ellipsis}${right}`;
 }
+
+export function TextEllipsis(text = '', maxWidth = 30) {
+  if (text.length <= maxWidth) {
+    return text;
+  }
+
+  return `${text.substr(0, maxWidth)}...`;
+}

@@ -3,6 +3,8 @@ import { ethers } from 'ethers';
 import React, { useEffect, useState } from 'react';
 import { Balance } from './components/balance';
 import { Description } from './components/description';
+import { Footer } from './components/footer';
+import { FrequentQuestions } from './components/frequentQuestions';
 import { Header } from './components/header';
 import { Liquidity } from './components/liquidity';
 import { VideoList } from './components/videoList';
@@ -149,11 +151,20 @@ export default function App() {
           totalReferralEarned={0.002}
           totalReferralWithDraw={0}
           totalStaked={1.02}
-          totalStakedTooltip="Lorem Ipsum"
-          availableForWithdrawTooltip="Lorem Ipsum"
+          totalStakedTooltip='Lorem Ipsum'
+          availableForWithdrawTooltip='Lorem Ipsum'
           onWithdraw={handleWithdraw}
         />
+
+        <FrequentQuestions />
       </Flex>
+
+      <Footer
+        telegram='https://telegram.org'
+        instagram='https://instagram.com'
+        twitter='https://twitter.com'
+        youtube='https://youtube.com'
+      />
     </Flex>
   );
 }

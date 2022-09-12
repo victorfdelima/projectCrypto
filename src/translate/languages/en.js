@@ -60,9 +60,6 @@ export const messages = {
       },
       frequentQuests: {
         title: 'Frequently asked questions',
-      },
-      time: {
-        days: 'Days',
         oneQuest: 'Do I need to pay to join the community?',
         oneAnswer:
           'To join our “Pump Members“ we do not charge any value. A fee of $89 ischarged if you wish to join our “VIP Members” community.',
@@ -82,6 +79,9 @@ export const messages = {
         sixAnswer:
           'In our free group you only participate in our free pump signals andyou can use the full tutorials. Our VIP group offers networking withother members, support and exclusive pumps.',
       },
+      time: {
+        days: 'Days',
+      },
       general: {
         change: 'Change',
         overview: 'Overview',
@@ -95,7 +95,7 @@ export const messages = {
         whitepaper: 'Whitepaper',
         becomeAPartner: 'Become a Partner',
         presentation: 'Presentation',
-        allRightsReserved: 'All rights reserved',
+        allRightsReserved: 'All rights reserved.',
         termsOfUse: 'Terms of Use',
         privacyPolicy: 'Privacy Policy',
       },
