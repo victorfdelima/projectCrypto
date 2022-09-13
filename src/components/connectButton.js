@@ -34,6 +34,13 @@ export function ConnectButton({ total, id, onConnectWallet, onDisconnect }) {
       onConnectWallet(type);
     };
   }
+  function handleConnectWalletConnect(type) {
+    return () => {
+      activate(connectors.walletConnect);
+      onClose();
+      onConnectWallet(type);
+    };
+  }
 
   return (
     <>
@@ -129,7 +136,7 @@ export function ConnectButton({ total, id, onConnectWallet, onDisconnect }) {
               py="2rem"
               mt="1rem"
               colorScheme="blackAlpha"
-              onClick={handleConnectWallet("walletconnect")}
+              onClick={handleConnectWalletConnect("walletconnect")}
             >
               WalletConnect
               <img
