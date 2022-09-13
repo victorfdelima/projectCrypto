@@ -1,6 +1,7 @@
 import { Flex } from '@chakra-ui/react';
-import { ethers } from 'ethers';
+import { useWeb3React } from '@web3-react/core';
 import React, { useEffect, useState } from 'react';
+import Web3 from 'web3';
 import { Balance } from './components/balance';
 import { Description } from './components/description';
 import { Footer } from './components/footer';
@@ -8,111 +9,37 @@ import { FrequentQuestions } from './components/frequentQuestions';
 import { Header } from './components/header';
 import { Liquidity } from './components/liquidity';
 import { VideoList } from './components/videoList';
-import erc20abi from './ERC20abi.json';
 
 export default function App() {
-  const [txs, setTxs] = useState([]);
-  const [contractListened, setContractListened] = useState();
-  const [token, setToken] = useState(null);
-  const [contractInfo, setContractInfo] = useState({
-    address: '-',
-    tokenName: '-',
-    tokenSymbol: '-',
-    totalSupply: '-',
-  });
-  const [balanceInfo, setBalanceInfo] = useState({
-    address: '-',
-    balance: '-',
-  });
+  const [token, setToken] = useState();
+  const { account } = useWeb3React();
+  const [balance, setBalance] = useState(0);
+
+  if (typeof window.ethereum !== 'undefined') {
+    console.log('MetaMask is installed!');
+  }
 
   useEffect(() => {
-    if (contractInfo.address !== '-') {
-      const provider = new ethers.providers.Web3Provider(window.ethereum);
-      const erc20 = new ethers.Contract(
-        contractInfo.address,
-        erc20abi,
-        provider,
-      );
-
-      erc20.on('Transfer', (from, to, amount, event) => {
-        setTxs((currentTxs) => [
-          ...currentTxs,
-          {
-            txHash: event.transactionHash,
-            from,
-            to,
-            amount: String(amount),
-          },
-        ]);
-      });
-      setContractListened(erc20);
-
-      return () => {
-        contractListened.removeAllListeners();
-      };
+    if (!token) {
+      return;
     }
-  }, [contractInfo.address]);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const data = new FormData(e.target);
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-
-    const erc20 = new ethers.Contract(data.get('addr'), erc20abi, provider);
-
-    const tokenName = await erc20.name();
-    const tokenSymbol = await erc20.symbol();
-    const totalSupply = await erc20.totalSupply();
-
-    setContractInfo({
-      address: data.get('addr'),
-      tokenName,
-      tokenSymbol,
-      totalSupply,
+    const web3 = new Web3(window.ethereum);
+    web3.eth.getBalance(token).then((balanceInWei) => {
+      const costBalance = web3.utils.fromWei(balanceInWei);
+      setBalance(costBalance);
     });
-  };
-
-  const getMyBalance = async () => {
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    await provider.send('eth_requestAccounts', []);
-    const erc20 = new ethers.Contract(contractInfo.address, erc20abi, provider);
-    const signer = await provider.getSigner();
-    const signerAddress = await signer.getAddress();
-    const balance = await erc20.balanceOf(signerAddress);
-
-    setBalanceInfo({
-      address: signerAddress,
-      balance: String(balance),
-    });
-  };
-
-  const handleTransfer = async (e) => {
-    e.preventDefault();
-    const data = new FormData(e.target);
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
-    await provider.send('eth_requestAccounts', []);
-    const signer = await provider.getSigner();
-    const erc20 = new ethers.Contract(contractInfo.address, erc20abi, signer);
-    await erc20.transfer(data.get('recipient'), data.get('amount'));
-  };
+  }, [token]);
 
   function handleConnectWallet(type) {
-    // type: 'metamask' | 'walletconnect'
-
-    // connect wallet
-
-    setToken('0x2c818u65y8d91ye252');
+    setToken(account);
   }
 
   function handleDisconnect() {
-    // disconnect wallet
-
     setToken(null);
   }
 
-  function handleWithdraw() {
-    // withdraw
-  }
+  function handleWithdraw() {}
 
   return (
     <Flex flexDir='column'>
@@ -120,7 +47,7 @@ export default function App() {
         bnbPrice={283.2}
         contractBalance={204.6}
         investors={1618}
-        total={0.42}
+        total={balance}
         id={token}
         onConnectWallet={handleConnectWallet}
         onDisconnect={handleDisconnect}
@@ -129,7 +56,7 @@ export default function App() {
       <Flex w={['95vw', '80vw', '65vw']} m='0 auto' flexDir='column'>
         <Description />
 
-        <Liquidity total={0.42} />
+        <Liquidity total={balance} />
 
         <VideoList
           videos={[
