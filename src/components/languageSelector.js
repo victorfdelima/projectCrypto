@@ -17,7 +17,7 @@ export function LanguageSelector() {
       flagImg:
         'https://assets.website-files.com/630d1bf74bbd1f9cc080f503/630e09ac5edb523d8e4a6a20_Portuguese.png',
 
-      label: 'Português',
+      label: 'Portuguese',
       value: 'pt-BR',
     },
     {
@@ -29,7 +29,7 @@ export function LanguageSelector() {
     {
       flagImg:
         'https://assets.website-files.com/630d1bf74bbd1f9cc080f503/630e09ac22283f8b1fcd7b52_Spanish.png',
-      label: 'Español',
+      label: 'Spanish',
       value: 'es-ES',
     },
   ]);
