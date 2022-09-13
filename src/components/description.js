@@ -66,7 +66,7 @@ export function Description() {
         <img
           className='cryptoImage'
           src={homeIconsImg}
-          alt='Crypto image'
+          alt='Crypto'
           style={{
             width: '100%',
             position: 'relative',
@@ -77,7 +77,7 @@ export function Description() {
         <img
           className='cryptoImage'
           src={homeIconsImg}
-          alt='Crypto image'
+          alt='Crypto'
           style={{
             width: '100%',
             marginLeft: '3rem',

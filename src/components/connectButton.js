@@ -66,12 +66,25 @@ export function ConnectButton({ total, id, onConnectWallet, onDisconnect }) {
           </MenuButton>
 
           <MenuList bgColor='#17191d'>
-            <MenuItem onClick={() => {}} _hover={{ bgColor: 'transparent' }}>
+            <MenuItem
+              onClick={() => {}}
+              _hover={{ bgColor: 'transparent' }}
+              _focus={{
+                bgColor: 'transparent',
+                boxShadow: 'hidden',
+                outline: 'none',
+              }}
+            >
               Change
             </MenuItem>
             <MenuItem
               onClick={onDisconnect}
               _hover={{ bgColor: 'transparent' }}
+              _focus={{
+                bgColor: 'transparent',
+                boxShadow: 'hidden',
+                outline: 'none',
+              }}
             >
               Disconnect
             </MenuItem>

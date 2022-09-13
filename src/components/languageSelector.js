@@ -77,7 +77,7 @@ export function LanguageSelector() {
         </Flex>
       </MenuButton>
 
-      <MenuList bgColor='#17191d' w='fit-content' minW="0">
+      <MenuList bgColor='#17191d' w='fit-content' minW='0'>
         {availableLanguages.current
           .filter((l) => l.value !== currentLanguage.value)
           .map((l) => (
@@ -87,6 +87,11 @@ export function LanguageSelector() {
               fontSize={14}
               fontWeight={400}
               _hover={{ bgColor: 'transparent' }}
+              _focus={{
+                bgColor: 'transparent',
+                boxShadow: 'hidden',
+                outline: 'none',
+              }}
             >
               <img
                 src={l.flagImg}
