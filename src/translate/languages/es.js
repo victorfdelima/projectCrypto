@@ -1,5 +1,5 @@
 export const messages = {
-  en: {
+  es: {
     translation: {
       header: {
         contractBalance: 'Montante del contracto',
