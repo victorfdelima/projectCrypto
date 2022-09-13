@@ -9,7 +9,7 @@ export const messages = {
       },
       modal: {
         termsOfService: 'Terms of Service',
-        privacyOne: 'By connecting a wallet, you agree to PoolsMine ',
+        privacyOne: 'Connecting a wallet, you are agree to PoolsMine privacy terms ',
         privacyTwo:
           ' and acknowledge that you have read and understand the PoolsMine Disclaimer.',
       },
@@ -31,7 +31,7 @@ export const messages = {
         totalReturn: 'Total Return',
         withdrawTime: 'Withdraw Time',
         totalProfit: 'Total Profit',
-        warning: 'By using Dapp you agree to the ',
+        warning: 'Using the app you are agree to the ',
         stakingBnb: 'Staking BNB',
       },
       cards: {
@@ -39,9 +39,9 @@ export const messages = {
         one: 'Buying BNB on Binance 🪙',
         two: 'Creating MetaMask Wallet 🦊',
         three: 'How to invest on PoolsMine',
-        four: 'Withdrawing your Profits',
+        four: 'withdraw your Profits',
         five: 'How to earn Referring?',
-        six: 'Reinvestingy your Profits',
+        six: 'Reinvesting your Profits',
       },
       balance: {
         title: 'Balance',
