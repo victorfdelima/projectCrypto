@@ -1,8 +1,7 @@
-import React from 'react';
 import { Box, Button, Flex, Heading, Text, Tooltip } from '@chakra-ui/react';
-import { i18n } from '../translate/i18n';
+import React from 'react';
 import { FiAlertCircle } from 'react-icons/fi';
-import { TextEllipsis } from '../utils/text';
+import { i18n } from '../translate/i18n';
 
 export function Balance({
   totalStaked,
@@ -117,7 +116,6 @@ export function Balance({
         p='20px'
         flex={3}
         h='100%'
-        minH='100%'
         maxH='100%'
         flexDir='column'
         justify='space-between'

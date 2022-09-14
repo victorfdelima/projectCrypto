@@ -9,7 +9,8 @@ export const messages = {
       },
       modal: {
         termsOfService: 'Terms of Service',
-        privacyOne: 'Connecting a wallet, you are agree to PoolsMine privacy terms ',
+        privacyOne:
+          'Connecting a wallet, you are agree to PoolsMine privacy terms ',
         privacyTwo:
           ' and acknowledge that you have read and understand the PoolsMine Disclaimer.',
       },
@@ -21,10 +22,12 @@ export const messages = {
         roi: 'ROI in 22 days',
       },
       liquidity: {
+        main: 'Liquidity',
         title: 'Add Liquidity',
         selectPlan: 'Select plan',
         anyTime: 'Any time',
         anyTimeDescription: 'Withdraw Time',
+        endPlan: 'End plan',
         dailyProfit: 'Daily Profit',
         depositAmount: 'Deposit Amount',
         balance: 'Balance',
@@ -82,6 +85,17 @@ export const messages = {
       time: {
         days: 'Days',
       },
+      myPools: {
+        title: 'My Pools',
+        status: {
+          inProgress: 'In Progress',
+          completed: 'Completed',
+        },
+        stakedAmount: 'Staked Amount',
+        percentPerDay: '% per day',
+        expectedProfit: 'Expected Profit',
+        percentProfit: '% Profit',
+      },
       general: {
         change: 'Change',
         overview: 'Overview',
@@ -98,6 +112,8 @@ export const messages = {
         allRightsReserved: 'All rights reserved.',
         termsOfUse: 'Terms of Use',
         privacyPolicy: 'Privacy Policy',
+        select: 'Select',
+        myPools: 'My Pools',
       },
     },
   },

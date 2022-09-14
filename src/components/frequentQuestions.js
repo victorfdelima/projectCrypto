@@ -1,14 +1,5 @@
-import React from 'react';
-import {
-  Box,
-  Button,
-  Collapse,
-  Flex,
-  Grid,
-  Heading,
-  Text,
-} from '@chakra-ui/react';
-import { useState } from 'react';
+import { Box, Button, Collapse, Flex, Heading, Text } from '@chakra-ui/react';
+import React, { useState } from 'react';
 import { i18n } from '../translate/i18n';
 
 export function FrequentQuestions() {

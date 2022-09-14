@@ -20,6 +20,7 @@ i18n.use(initReactI18next).init({
   resources: {
     en: messages.en,
     pt: messages.pt,
+    es: messages.es
   },
   react: {
     useSuspense: false,

@@ -1,22 +1,11 @@
+import { Box, Flex, Text } from '@chakra-ui/react';
 import React from 'react';
-import {
-  Box,
-  Button,
-  Flex,
-  Menu,
-  MenuButton,
-  MenuItem,
-  MenuList,
-  Text,
-} from '@chakra-ui/react';
-import { formatCurrency } from '../utils/formatCurrency';
-import { Logo } from './logo';
-import { i18n } from '../translate/i18n';
 import { Link, useLocation } from 'react-router-dom';
-import { LanguageSelector } from './languageSelector';
-import { MiddleEllipsis } from '../utils/text';
-import { FaChevronDown } from 'react-icons/fa';
+import { i18n } from '../translate/i18n';
+import { formatCurrency } from '../utils/formatCurrency';
 import { ConnectButton } from './connectButton';
+import { LanguageSelector } from './languageSelector';
+import { Logo } from './logo';
 
 export function Header({
   bnbPrice,
