@@ -85,7 +85,17 @@ export const messages = {
              time: {
                days: 'Dias',
              },
-             myPools: { title: 'Mis Pools' },
+             myPools: {
+               title: 'My Pools',
+               status: {
+                 inProgress: 'In Progress',
+                 completed: 'Completed',
+               },
+               stakedAmount: 'Staked Amount',
+               percentPerDay: '% per day',
+               expectedProfit: 'Expected Profit',
+               percentProfit: '% Profit',
+             },
              general: {
                change: 'Change',
                overview: 'Overview',

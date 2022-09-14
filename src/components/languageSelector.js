@@ -18,7 +18,7 @@ export function LanguageSelector() {
       flagImg:
         '/flags/brazil.png',
 
-      label: 'Portuguese',
+      label: 'Português',
       value: 'pt-BR',
     },
     {
@@ -30,7 +30,7 @@ export function LanguageSelector() {
     {
       flagImg:
         '/flags/spain.png',
-      label: 'Spanish',
+      label: 'Español',
       value: 'es-ES',
     },
   ]);
