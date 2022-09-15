@@ -1,5 +1,5 @@
 import { Box, Button, Flex, Heading, Text, Tooltip } from '@chakra-ui/react';
-import React from 'react';
+import React, { useRef } from 'react';
 import { FiAlertCircle } from 'react-icons/fi';
 import { i18n } from '../translate/i18n';
 
@@ -14,6 +14,18 @@ export function Balance({
   availableForWithdrawTooltip,
   onWithdraw,
 }) {
+  const copyButtonRef = useRef(null);
+
+  function handleCopy() {
+    navigator.clipboard.writeText(referringLink);
+
+    copyButtonRef.current.innerHTML = i18n.t('general.copied');
+    
+    setTimeout(() => {
+      copyButtonRef.current.innerHTML = i18n.t('general.copy');
+    }, 1500);
+  }
+
   return (
     <Flex
       mt='3rem'
@@ -149,6 +161,7 @@ export function Balance({
           />
 
           <Button
+            ref={copyButtonRef}
             bgColor='#eba524'
             color='white'
             colorScheme='yellow'
@@ -156,6 +169,7 @@ export function Balance({
             fontWeight='600'
             px='32px'
             textTransform='uppercase'
+            onClick={handleCopy}
           >
             {i18n.t('general.copy')}
           </Button>
@@ -179,6 +193,7 @@ export function Balance({
               fontFamily='Inconsolata, monospace'
               fontWeight='700'
               color='#fff'
+              textAlign='center'
             >
               {totalReferralEarned} BNB
             </Text>
@@ -200,6 +215,7 @@ export function Balance({
               fontFamily='Inconsolata, monospace'
               fontWeight='700'
               color='#fff'
+              textAlign='center'
             >
               {totalReferralWithDraw}
             </Text>
@@ -221,6 +237,7 @@ export function Balance({
               fontFamily='Inconsolata, monospace'
               fontWeight='700'
               color='#fff'
+              textAlign='center'
             >
               {directReferredMembers}
             </Text>

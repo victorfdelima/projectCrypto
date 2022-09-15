@@ -106,6 +106,7 @@ export const messages = {
                termsAndPolicies: 'Termos e Políticas',
                withdraw: 'Retirar',
                copy: 'Copiar',
+               copied: 'Copiado',
                about: 'Sobre',
                whitepaper: 'Whitepaper',
                becomeAPartner: 'Torne-se um parceiro',
