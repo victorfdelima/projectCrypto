@@ -9,27 +9,28 @@ import {
 import React, { useRef, useState } from 'react';
 import { FaChevronDown } from 'react-icons/fa';
 
+
 const I18N_STORAGE_KEY = 'i18nextLng';
 
 export function LanguageSelector() {
   const availableLanguages = useRef([
     {
       flagImg:
-        'https://assets.website-files.com/630d1bf74bbd1f9cc080f503/630e09ac5edb523d8e4a6a20_Portuguese.png',
+        '/flags/brazil.png',
 
-      label: 'Portuguese',
+      label: 'Português',
       value: 'pt-BR',
     },
     {
       flagImg:
-        'https://assets.website-files.com/630d1bf74bbd1f9cc080f503/630e09accb00f172460cce38_English.png',
+        '/flags/united-states.png',
       label: 'English',
       value: 'en-US',
     },
     {
       flagImg:
-        'https://assets.website-files.com/630d1bf74bbd1f9cc080f503/630e09ac22283f8b1fcd7b52_Spanish.png',
-      label: 'Spanish',
+        '/flags/spain.png',
+      label: 'Español',
       value: 'es-ES',
     },
   ]);
@@ -48,6 +49,8 @@ export function LanguageSelector() {
     return () => {
       localStorage.setItem(I18N_STORAGE_KEY, newLanguage);
       setCurrentLanguage(newLanguage);
+
+      // eslint-disable-next-line
       window.location = window.location;
     };
   }
@@ -77,7 +80,7 @@ export function LanguageSelector() {
         </Flex>
       </MenuButton>
 
-      <MenuList bgColor='#17191d' w='fit-content' minW="0">
+      <MenuList bgColor='#17191d' w='fit-content' minW='0'>
         {availableLanguages.current
           .filter((l) => l.value !== currentLanguage.value)
           .map((l) => (
@@ -87,6 +90,11 @@ export function LanguageSelector() {
               fontSize={14}
               fontWeight={400}
               _hover={{ bgColor: 'transparent' }}
+              _focus={{
+                bgColor: 'transparent',
+                boxShadow: 'hidden',
+                outline: 'none',
+              }}
             >
               <img
                 src={l.flagImg}

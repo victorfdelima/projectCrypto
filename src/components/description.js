@@ -4,23 +4,25 @@ import { i18n } from '../translate/i18n';
 import homeIconsImg from '../assets/home-icons.png';
 
 export function Description() {
-  useEffect(() => {
-    document.addEventListener('mousemove', (e) => {
-      const pos = {
-        x: e.clientX / window.innerWidth,
-        y: e.clientY / window.innerHeight,
-      };
+  const detectMouse = (e) => {
+    const pos = {
+      x: e.clientX / window.innerWidth,
+      y: e.clientY / window.innerHeight,
+    };
 
-      document.querySelectorAll('.cryptoImage').forEach((e) => {
-        e.style.top = `${(pos.y * -1.2).toFixed(2)}rem`;
-      });
-      document.querySelectorAll('.cryptoImage').forEach((e) => {
-        e.style.left = `${(pos.x * -1.2).toFixed(2)}rem`;
-      });
+    document.querySelectorAll('.cryptoImage').forEach((e) => {
+      e.style.top = `${(pos.y * -1.2).toFixed(2)}rem`;
     });
+    document.querySelectorAll('.cryptoImage').forEach((e) => {
+      e.style.left = `${(pos.x * -1.2).toFixed(2)}rem`;
+    });
+  };
+
+  useEffect(() => {
+    document.addEventListener('mousemove', detectMouse);
 
     return () => {
-      document.removeEventListener('mousemove');
+      document.removeEventListener('mousemove', detectMouse);
     };
   }, []);
 
@@ -66,7 +68,7 @@ export function Description() {
         <img
           className='cryptoImage'
           src={homeIconsImg}
-          alt='Crypto image'
+          alt='Crypto'
           style={{
             width: '100%',
             position: 'relative',
@@ -77,7 +79,7 @@ export function Description() {
         <img
           className='cryptoImage'
           src={homeIconsImg}
-          alt='Crypto image'
+          alt='Crypto'
           style={{
             width: '100%',
             marginLeft: '3rem',

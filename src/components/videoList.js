@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Box, Flex, Heading } from '@chakra-ui/react';
 import '@vime/core/themes/default.css';
 import { i18n } from '../translate/i18n';
@@ -7,8 +7,42 @@ import { FaPlay } from 'react-icons/fa';
 
 export function VideoList({ videos = [''] }) {
   const [selectedVideo, setSelectedVideo] = useState(videos[0]);
+  const [isLoading, setIsLoading] = useState(false);
 
   const numbers = useRef(['one', 'two', 'three', 'four', 'five', 'six']);
+
+  function youtubeGetID(url) {
+    var ID = '';
+    url = url
+      .replace(/(>|<)/gi, '')
+      .split(/(vi\/|v=|\/v\/|youtu\.be\/|\/embed\/)/);
+    if (url[2] !== undefined) {
+      // eslint-disable-next-line
+      ID = url[2].split(/[^0-9a-z_\-]/i);
+      ID = ID[0];
+    } else {
+      ID = url;
+    }
+    return ID;
+  }
+
+  useEffect(() => {
+    setIsLoading(true);
+  }, [selectedVideo]);
+
+  useEffect(() => {
+    let timer;
+
+    if (isLoading) {
+      timer = setTimeout(() => {
+        setIsLoading(false);
+      }, 500);
+    }
+
+    return () => {
+      clearTimeout(timer);
+    };
+  }, [isLoading]);
 
   return (
     <Flex flexDir='column' align='flex-start' mt='3rem'>
@@ -54,10 +88,19 @@ export function VideoList({ videos = [''] }) {
           ))}
         </Flex>
         <Flex flex={1} width='100%' ml={['0', '0', '3rem']}>
-          <Player style={{ flex: 1 }}>
-            <Youtube videoId={selectedVideo} />
-            <DefaultUi />
-          </Player>
+          {isLoading ? (
+            <Flex
+              flex={1}
+              bgColor='#121214'
+              minH={['228px', '228px', '512px']}
+              borderRadius='8px'
+            />
+          ) : (
+            <Player style={{ flex: 1 }}>
+              <Youtube videoId={youtubeGetID(selectedVideo)} />
+              <DefaultUi />
+            </Player>
+          )}
         </Flex>
       </Flex>
     </Flex>

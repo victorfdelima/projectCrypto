@@ -9,7 +9,8 @@ export const messages = {
       },
       modal: {
         termsOfService: 'Terms of Service',
-        privacyOne: 'Connecting a wallet, you are agree to PoolsMine privacy terms ',
+        privacyOne:
+          'Connecting a wallet, you are agree to PoolsMine privacy terms ',
         privacyTwo:
           ' and acknowledge that you have read and understand the PoolsMine Disclaimer.',
       },
@@ -21,10 +22,12 @@ export const messages = {
         roi: 'ROI in 22 days',
       },
       liquidity: {
+        main: 'Liquidity',
         title: 'Add Liquidity',
         selectPlan: 'Select plan',
         anyTime: 'Any time',
         anyTimeDescription: 'Withdraw Time',
+        endPlan: 'End plan',
         dailyProfit: 'Daily Profit',
         depositAmount: 'Deposit Amount',
         balance: 'Balance',
@@ -60,9 +63,6 @@ export const messages = {
       },
       frequentQuests: {
         title: 'Frequently asked questions',
-      },
-      time: {
-        days: 'Days',
         oneQuest: 'Do I need to pay to join the community?',
         oneAnswer:
           'To join our “Pump Members“ we do not charge any value. A fee of $89 ischarged if you wish to join our “VIP Members” community.',
@@ -82,6 +82,20 @@ export const messages = {
         sixAnswer:
           'In our free group you only participate in our free pump signals andyou can use the full tutorials. Our VIP group offers networking withother members, support and exclusive pumps.',
       },
+      time: {
+        days: 'Days',
+      },
+      myPools: {
+        title: 'My Pools',
+        status: {
+          inProgress: 'In Progress',
+          completed: 'Completed',
+        },
+        stakedAmount: 'Staked Amount',
+        percentPerDay: '% per day',
+        expectedProfit: 'Expected Profit',
+        percentProfit: '% Profit',
+      },
       general: {
         change: 'Change',
         overview: 'Overview',
@@ -91,13 +105,16 @@ export const messages = {
         termsAndPolicies: 'Terms and Policies',
         withdraw: 'Withdraw',
         copy: 'Copy',
+        copied: 'Copied',
         about: 'About',
         whitepaper: 'Whitepaper',
         becomeAPartner: 'Become a Partner',
         presentation: 'Presentation',
-        allRightsReserved: 'All rights reserved',
+        allRightsReserved: 'All rights reserved.',
         termsOfUse: 'Terms of Use',
         privacyPolicy: 'Privacy Policy',
+        select: 'Select',
+        myPools: 'My Pools',
       },
     },
   },

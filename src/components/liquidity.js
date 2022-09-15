@@ -2,8 +2,19 @@ import React, { useRef, useState } from 'react';
 import { Box, Button, Flex, Heading, Input, Text } from '@chakra-ui/react';
 import { i18n } from '../translate/i18n';
 
-export function Liquidity({ total }) {
+export function Liquidity({ total, onSubmit }) {
   const [selectedGroupId, setSelectedGroupId] = useState(1);
+  const [selectedPlan, setSelectedPlan] = useState(null);
+  const [value, setValue] = useState('');
+
+  function handleSubmit() {
+    onSubmit({
+      plan: selectedPlan.type,
+      percentage: selectedPlan.percentage,
+      days: selectedPlan.days,
+      value: Number(value),
+    });
+  }
 
   const percentageGroups = useRef([
     {
@@ -20,6 +31,19 @@ export function Liquidity({ total }) {
       id: 3,
       percentage: 5,
       days: 28,
+    },
+  ]);
+
+  const plans = useRef([
+    {
+      id: 1,
+      type: 'any-time',
+      label: i18n.t('liquidity.anyTime'),
+    },
+    {
+      id: 2,
+      type: 'end-plan',
+      label: i18n.t('liquidity.endPlan'),
     },
   ]);
 
@@ -47,82 +71,133 @@ export function Liquidity({ total }) {
             {i18n.t('liquidity.selectPlan')}
           </Text>
 
-          <Flex
-            justify='space-between'
-            align='center'
-            border='1px solid'
-            borderColor='hsla(0, 0%, 100%, 0.2)'
-            borderRadius='8px'
-            w='100%'
-            mt='10px'
-            p='10px'
-          >
-            <Flex flexDir='column'>
-              <Text fontWeight={600}>{i18n.t('liquidity.anyTime')}</Text>
-              <Box
-                p='0.25rem'
-                bgColor='hsla(0, 0%, 100%, 0.2)'
-                borderRadius='6px'
-                fontSize='11px'
-                mt='10px'
-              >
-                {i18n.t('liquidity.withdrawTime')}
-              </Box>
-            </Flex>
-
-            <Button
-              onClick={() => {}}
-              bgColor='hsla(0, 0%, 100%, 0.2)'
-              fontSize='12px'
-              padding='0.5rem 0.75rem'
-              h='auto'
-              colorScheme='blackAlpha'
+          {selectedPlan ? (
+            <Flex
+              justify='space-between'
+              align='center'
+              border='1px solid'
+              borderColor='hsla(0, 0%, 100%, 0.2)'
+              borderRadius='8px'
+              w='100%'
+              mt='10px'
+              p='10px'
             >
-              {i18n.t('general.change')}
-            </Button>
-          </Flex>
-
-          <Flex style={{ gap: '0.5rem' }} mt='1rem'>
-            {percentageGroups.current.map((group) => (
-              <Flex
-                as='button'
-                key={group.id}
-                flexDir='column'
-                border='1px solid'
-                borderColor={
-                  group.id === selectedGroupId
-                    ? '#ffbc40'
-                    : 'hsla(0, 0%, 100%, 0.2)'
-                }
-                borderRadius='8px'
-                w='100%'
-                p='10px'
-                onClick={() => setSelectedGroupId(group.id)}
-              >
-                <Text
-                  fontSize='20px'
-                  fontFamily='Inconsolata, monospace'
-                  color='#fff'
-                  fontWeight='700'
-                >
-                  {group.percentage}%
+              <Flex flexDir='column'>
+                <Text fontWeight={600} color='#ffbc40'>
+                  {selectedPlan.label}
                 </Text>
-                <Text color='#ffbc40' fontSize='13px'>
-                  {i18n.t('liquidity.dailyProfit')}
-                </Text>
-                <Text
+                <Box
                   p='0.25rem'
                   bgColor='hsla(0, 0%, 100%, 0.2)'
                   borderRadius='6px'
                   fontSize='11px'
-                  mt='4px'
-                  w='fit-content'
+                  mt='10px'
                 >
-                  {group.days} {i18n.t('time.days')}
-                </Text>
+                  {i18n.t('liquidity.withdrawTime')}
+                </Box>
               </Flex>
-            ))}
-          </Flex>
+
+              <Button
+                onClick={() =>
+                  setSelectedPlan(
+                    plans.current.find(
+                      (currentPlan) => currentPlan.id !== selectedPlan.id,
+                    ),
+                  )
+                }
+                bgColor='hsla(0, 0%, 100%, 0.2)'
+                fontSize='12px'
+                padding='0.5rem 0.75rem'
+                h='auto'
+                colorScheme='blackAlpha'
+              >
+                {i18n.t('general.change')}
+              </Button>
+            </Flex>
+          ) : (
+            plans.current.map((plan) => (
+              <Flex
+                key={plan.id}
+                justify='space-between'
+                align='center'
+                border='1px solid'
+                borderColor='hsla(0, 0%, 100%, 0.2)'
+                borderRadius='8px'
+                w='100%'
+                mt='10px'
+                p='10px'
+              >
+                <Flex flexDir='column'>
+                  <Text fontWeight={600}>{plan.label}</Text>
+                  <Box
+                    p='0.25rem'
+                    bgColor='hsla(0, 0%, 100%, 0.2)'
+                    borderRadius='6px'
+                    fontSize='11px'
+                    mt='10px'
+                    w='fit-content'
+                  >
+                    {i18n.t('liquidity.withdrawTime')}
+                  </Box>
+                </Flex>
+
+                <Button
+                  onClick={() => setSelectedPlan(plan)}
+                  bgColor='hsla(0, 0%, 100%, 0.2)'
+                  fontSize='12px'
+                  padding='0.5rem 0.75rem'
+                  h='auto'
+                  colorScheme='blackAlpha'
+                >
+                  {i18n.t('general.select')}
+                </Button>
+              </Flex>
+            ))
+          )}
+
+          {selectedPlan && (
+            <Flex style={{ gap: '0.5rem' }} mt='1rem'>
+              {percentageGroups.current.map((group) => (
+                <Flex
+                  as='button'
+                  key={group.id}
+                  flexDir='column'
+                  border='1px solid'
+                  borderColor={
+                    group.id === selectedGroupId
+                      ? '#ffbc40'
+                      : 'hsla(0, 0%, 100%, 0.2)'
+                  }
+                  borderRadius='8px'
+                  w='100%'
+                  p='10px'
+                  onClick={() => setSelectedGroupId(group.id)}
+                >
+                  <Text
+                    fontSize='20px'
+                    fontFamily='Inconsolata, monospace'
+                    color='#fff'
+                    fontWeight='700'
+                  >
+                    {group.percentage}%
+                  </Text>
+                  <Text color='#ffbc40' fontSize='13px'>
+                    {i18n.t('liquidity.dailyProfit')}
+                  </Text>
+                  <Text
+                    p='0.25rem'
+                    bgColor='hsla(0, 0%, 100%, 0.2)'
+                    borderRadius='6px'
+                    fontSize='11px'
+                    mt='4px'
+                    w='fit-content'
+                  >
+                    {group.days} {i18n.t('time.days')}
+                  </Text>
+                </Flex>
+              ))}
+            </Flex>
+          )}
 
           <Flex flexDir='column' mt='20px'>
             <Text color='#fff' fontSize='15px' fontWeight='600'>
@@ -145,6 +220,10 @@ export function Liquidity({ total }) {
                 fontFamily='Inconsolata, monospace'
                 fontSize='32px'
                 fontWeight='700'
+                value={value}
+                onChange={(e) => setValue(e.target.value)}
+                type='number'
+                _focus={{ boxShadow: 'none' }}
               />
               <Flex flexDir='column' mr='10px'>
                 <Flex
@@ -177,6 +256,7 @@ export function Liquidity({ total }) {
             colorScheme='yellow'
             h='52px'
             color='white'
+            onClick={handleSubmit}
           >
             {i18n.t('liquidity.stakingBnb')}
           </Button>
@@ -187,7 +267,7 @@ export function Liquidity({ total }) {
           </Text>
           <Flex mt='10px' flex={1} borderRadius='8px' bgColor='#25232a'></Flex>
 
-          <Flex style={{ gap: '1rem' }} mt="20px">
+          <Flex style={{ gap: '1rem' }} mt='20px'>
             <Flex
               flexDir='column'
               align='center'
@@ -249,7 +329,7 @@ export function Liquidity({ total }) {
                 fontSize='11px'
                 color='#fff'
               >
-                {140}% {i18n.t('liquidity.totalProfit')}
+                {selectedPlan ? selectedPlan.label : '-'}
               </Box>
             </Flex>
           </Flex>
@@ -262,10 +342,12 @@ export function Liquidity({ total }) {
             p='6px 4px'
             borderRadius='6px'
             mt='20px'
-            mb="6px"
+            mb='6px'
           >
             {i18n.t('general.warning')}: {i18n.t('liquidity.warning')}
-            <Text color='#ffbc40'>{i18n.t('general.termsAndPolicies')}</Text>
+            <Text color='#ffbc40'>
+              &nbsp;{i18n.t('general.termsAndPolicies')}
+            </Text>
           </Box>
         </Flex>
       </Flex>
